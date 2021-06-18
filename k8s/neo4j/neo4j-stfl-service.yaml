@@ -1,0 +1,33 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: api-peer-svc-update
+    namespace: peers
+  name: api-peer-svc-update
+spec:
+  type: ClusterIP
+  selector:
+    app: api-peer-update
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: api-peer-headless-update
+    namespace: peers
+  name: api-peer-headless-update
+spec:
+  clusterIP: None
+  selector:
+    app: api-peer-update
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000
